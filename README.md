@@ -65,7 +65,6 @@ The slider displays a series of customer reviews. It automatically transitions b
 slider/
 ├── public/
 │   ├── sidebar.png
-│   └── ...
 ├── src/
 │   ├── components/
 │   │   └── ReviewCard.tsx
@@ -75,12 +74,15 @@ slider/
 │   │   └── index.ts
 │   ├── App.tsx
 │   ├── main.tsx
-│   └── ...
+│   └── vite-env.d.ts
+├── .gitignore
+├── eslint.config.js
 ├── index.html
 ├── package.json
+├── README.md
 ├── tsconfig.json
-├── vite.config.ts
-└── README.md
+├── tsconfig.node.json
+└── vite.config.ts
 ```
 
 ## Contributing
