@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { peopleData } from "./data";
 import { PEOPLE } from "./types";
@@ -8,11 +8,11 @@ function App() {
   const [people] = useState<PEOPLE[]>(peopleData);
   const [index, setIndex] = useState<number>(0);
 
-  const navigate = (delta: number) => {
+  const navigate = useCallback((delta: number) => {
     setIndex(
       (prevIndex) => (prevIndex + delta + people.length) % people.length,
     );
-  };
+  }, [people.length]);
 
   const getPosition = (personIndex: number): string => {
     if (personIndex === index) return "activeSlide";
@@ -26,7 +26,7 @@ function App() {
       navigate(1);
     }, 5000);
     return () => clearInterval(slider);
-  }, [index]);
+  }, [index, navigate]);
 
   return (
     <section className="section">
