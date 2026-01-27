@@ -8,11 +8,14 @@ function App() {
   const [people] = useState<PEOPLE[]>(peopleData);
   const [index, setIndex] = useState<number>(0);
 
-  const navigate = useCallback((delta: number) => {
-    setIndex(
-      (prevIndex) => (prevIndex + delta + people.length) % people.length,
-    );
-  }, [people.length]);
+  const navigate = useCallback(
+    (delta: number) => {
+      setIndex(
+        (prevIndex) => (prevIndex + delta + people.length) % people.length,
+      );
+    },
+    [people.length],
+  );
 
   const getPosition = (personIndex: number): string => {
     if (personIndex === index) return "activeSlide";
