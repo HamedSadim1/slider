@@ -1,3 +1,10 @@
+/**
+ * Data voor beoordelingen
+ *
+ * Deze array bevat statische gegevens voor klantbeoordelingen
+ * die in de slider worden weergegeven.
+ */
+
 import { PEOPLE } from "../types";
 
 export const peopleData: PEOPLE[] = [
