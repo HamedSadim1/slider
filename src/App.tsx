@@ -37,10 +37,10 @@ function App() {
   // Functie om de positie van een persoon in de slider te bepalen
   // Retourneert CSS-klasse: 'activeSlide' voor huidige, 'lastSlide' voor vorige, 'nextSlide' voor anderen
   const getPosition = (personIndex: number): string => {
-    if (personIndex === index) return "activeSlide";
+    if (personIndex === index) return "active-slide";
     if (personIndex === (index - 1 + people.length) % people.length)
-      return "lastSlide";
-    return "nextSlide";
+      return "last-slide";
+    return "next-slide";
   };
 
   // useEffect voor automatische sliding elke 5 seconden
