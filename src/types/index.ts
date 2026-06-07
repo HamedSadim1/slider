@@ -11,3 +11,5 @@ export interface PEOPLE {
   title: string;
   quote: string;
 }
+
+export type SlidePosition = "active-slide" | "last-slide" | "next-slide";
