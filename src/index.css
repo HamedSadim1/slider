@@ -5,39 +5,24 @@ Variables
 */
 
 :root {
-  /* Modern gradient-based primary palette */
+  /* Primary palette */
   --clr-primary-50: hsl(210deg 40% 98%);
   --clr-primary-100: hsl(210deg 40% 96%);
   --clr-primary-200: hsl(210deg 40% 90%);
-  --clr-primary-300: hsl(210deg 40% 80%);
   --clr-primary-400: hsl(210deg 50% 60%);
   --clr-primary-500: hsl(210deg 60% 50%);
   --clr-primary-600: hsl(210deg 70% 42%);
   --clr-primary-700: hsl(210deg 75% 34%);
-  --clr-primary-800: hsl(210deg 80% 26%);
-  --clr-primary-900: hsl(210deg 85% 18%);
 
   /* Neutral palette */
-  --clr-neutral-50: hsl(220deg 20% 99%);
-  --clr-neutral-100: hsl(220deg 15% 96%);
-  --clr-neutral-200: hsl(220deg 13% 91%);
   --clr-neutral-300: hsl(220deg 10% 80%);
   --clr-neutral-400: hsl(220deg 8% 60%);
   --clr-neutral-500: hsl(220deg 7% 45%);
-  --clr-neutral-600: hsl(220deg 8% 35%);
-  --clr-neutral-700: hsl(220deg 10% 25%);
   --clr-neutral-800: hsl(220deg 12% 18%);
   --clr-neutral-900: hsl(220deg 15% 12%);
 
-  /* Semantic colors */
-  --clr-accent: hsl(340deg 80% 55%);
-  --clr-accent-light: hsl(340deg 80% 70%);
-  --clr-success: hsl(160deg 70% 40%);
-  --clr-warning: hsl(35deg 90% 55%);
-
   /* Surfaces */
   --clr-white: #fff;
-  --clr-black: #111;
   --clr-body-bg: hsl(220deg 30% 98%);
   --clr-card-bg: var(--clr-white);
   --clr-card-border: hsl(220deg 15% 93%);
@@ -46,8 +31,6 @@ Variables
   --shadow-sm: 0 1px 3px rgb(0 0 0 / 6%), 0 1px 2px rgb(0 0 0 / 4%);
   --shadow-md: 0 4px 12px rgb(0 0 0 / 8%), 0 2px 4px rgb(0 0 0 / 4%);
   --shadow-lg: 0 10px 30px rgb(0 0 0 / 10%), 0 4px 8px rgb(0 0 0 / 5%);
-  --shadow-xl: 0 20px 50px rgb(0 0 0 / 12%), 0 8px 16px rgb(0 0 0 / 6%);
-  --shadow-button: 0 4px 14px rgb(59 130 246 / 40%);
   --shadow-button-hover: 0 6px 20px rgb(59 130 246 / 50%);
 
   /* Typography */
@@ -56,22 +39,18 @@ Variables
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
   --font-size-xl: 1.25rem;
   --font-size-2xl: 1.5rem;
   --font-size-3xl: 2rem;
-  --font-size-4xl: 2.5rem;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  --font-weight-extrabold: 800;
   --line-height-tight: 1.2;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.75;
 
   /* Spacing */
-  --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
@@ -80,11 +59,8 @@ Variables
   --space-8: 2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
 
   /* Borders */
-  --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
@@ -93,13 +69,88 @@ Variables
   /* Transitions */
   --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slide: 600ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Layout */
-  --max-width: 1170px;
   --fixed-width: 720px;
+
+  /* Responsive SSOT – alleen deze overschrijven in media queries */
+  --slider-height: 520px;
+  --slider-radius: var(--radius-xl);
+  --nav-btn-size: 2.75rem;
+  --nav-btn-font-size: 1.25rem;
+  --nav-btn-offset: var(--space-4);
+  --img-size: 130px;
+  --img-border-width: 4px;
+  --content-padding-y: var(--space-10);
+  --content-padding-x: var(--space-8);
+  --title-bottom: var(--space-12);
+  --icon-size: 1.75rem;
+  --icon-margin-top: var(--space-5);
+  --text-max-width: 85%;
+}
+
+/* SSOT – layout variabelen voor extra grote schermen */
+@media (width > 1400px) {
+  :root {
+    --slider-height: 560px;
+    --img-size: 150px;
+    --text-max-width: 80%;
+    --icon-size: 2rem;
+  }
+}
+
+/* SSOT – tablet landscape */
+@media (width >= 769px) and (width <= 1024px) {
+  :root {
+    --slider-height: 500px;
+  }
+}
+
+/* SSOT – tablet portrait */
+@media (width >= 641px) and (width <= 768px) {
+  :root {
+    --slider-height: 480px;
+    --slider-radius: var(--radius-lg);
+    --img-size: 120px;
+    --content-padding-y: var(--space-8);
+    --content-padding-x: var(--space-6);
+  }
+}
+
+/* SSOT – phones */
+@media (width >= 400px) and (width <= 640px) {
+  :root {
+    --slider-height: 460px;
+    --slider-radius: var(--radius-lg);
+    --nav-btn-size: 2.25rem;
+    --nav-btn-font-size: 1rem;
+    --nav-btn-offset: var(--space-2);
+    --img-size: 110px;
+    --content-padding-y: var(--space-8);
+    --content-padding-x: var(--space-5);
+    --title-bottom: var(--space-10);
+    --icon-size: 1.4rem;
+  }
+}
+
+/* SSOT – small phones */
+@media (width < 400px) {
+  :root {
+    --slider-height: 420px;
+    --slider-radius: var(--radius-md);
+    --nav-btn-size: 2rem;
+    --nav-btn-font-size: 0.875rem;
+    --nav-btn-offset: var(--space-2);
+    --img-size: 90px;
+    --img-border-width: 3px;
+    --content-padding-y: var(--space-6);
+    --content-padding-x: var(--space-4);
+    --title-bottom: var(--space-8);
+    --icon-size: 1.2rem;
+    --icon-margin-top: var(--space-4);
+  }
 }
 
 /*
@@ -116,12 +167,6 @@ Global Styles
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 body {
   font-family: var(--font-primary);
   background: var(--clr-body-bg);
@@ -129,44 +174,20 @@ body {
   line-height: var(--line-height-normal);
   font-size: var(--font-size-base);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-ul {
-  list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-h1,
 h2,
-h3,
 h4 {
   line-height: var(--line-height-tight);
   margin-bottom: 0.75rem;
   color: var(--clr-neutral-900);
 }
 
-h1 {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-extrabold);
-}
-
 h2 {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
-}
-
-h3 {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
 }
 
 h4 {
@@ -185,6 +206,11 @@ button {
   border: none;
   outline: none;
   background: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 /*
@@ -290,7 +316,7 @@ Title
 
 .title {
   text-align: center;
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--title-bottom);
   position: relative;
 }
 
@@ -338,11 +364,11 @@ Slider Container
   margin: 0 auto;
   width: 100%;
   max-width: var(--fixed-width);
-  height: 520px;
+  height: var(--slider-height);
   position: relative;
   overflow: hidden;
   background: var(--clr-card-bg);
-  border-radius: var(--radius-xl);
+  border-radius: var(--slider-radius);
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--clr-card-border);
 }
@@ -390,7 +416,7 @@ article.next-slide {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-10) var(--space-8);
+  padding: var(--content-padding-y) var(--content-padding-x);
   width: 100%;
   max-width: 560px;
 }
@@ -402,12 +428,12 @@ Person Image
 */
 
 .person-img {
-  width: 130px;
-  height: 130px;
+  width: var(--img-size);
+  height: var(--img-size);
   border-radius: var(--radius-full);
   object-fit: cover;
   margin-bottom: var(--space-6);
-  border: 4px solid var(--clr-primary-100);
+  border: var(--img-border-width) solid var(--clr-primary-100);
   box-shadow:
     0 0 0 4px var(--clr-white),
     var(--shadow-md);
@@ -479,7 +505,7 @@ Quote text
 */
 
 .text {
-  max-width: 85%;
+  max-width: var(--text-max-width);
   margin: 0 auto;
   line-height: var(--line-height-relaxed);
   color: var(--clr-neutral-500);
@@ -499,8 +525,8 @@ Quote icon
 */
 
 .icon {
-  font-size: 1.75rem;
-  margin-top: var(--space-5);
+  font-size: var(--icon-size);
+  margin-top: var(--icon-margin-top);
   color: var(--clr-primary-200);
   transition: color var(--transition-fast);
 }
@@ -516,11 +542,11 @@ Navigation Buttons
 */
 
 .prev {
-  left: var(--space-4);
+  left: var(--nav-btn-offset);
 }
 
 .next {
-  right: var(--space-4);
+  right: var(--nav-btn-offset);
 }
 
 .prev,
@@ -529,14 +555,14 @@ Navigation Buttons
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: var(--nav-btn-size);
+  height: var(--nav-btn-size);
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--clr-white);
   color: var(--clr-primary-600);
-  font-size: 1.25rem;
+  font-size: var(--nav-btn-font-size);
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-md);
   transition:
@@ -621,7 +647,7 @@ Animations
 
 /*
 ===============
-Responsive – Small phones (< 400px)
+Responsive – resterende overrides (niet via SSOT variabelen)
 ===============
 */
 
@@ -655,10 +681,6 @@ Responsive – Small phones (< 400px)
     font-size: 0.65rem;
   }
 
-  .title {
-    margin-bottom: var(--space-8);
-  }
-
   .title h2 {
     font-size: 1.25rem;
     gap: var(--space-2);
@@ -676,22 +698,6 @@ Responsive – Small phones (< 400px)
     margin-top: var(--space-3);
   }
 
-  .section-center {
-    height: 420px;
-    border-radius: var(--radius-md);
-  }
-
-  .content {
-    padding: var(--space-6) var(--space-4);
-  }
-
-  .person-img {
-    width: 90px;
-    height: 90px;
-    margin-bottom: var(--space-4);
-    border-width: 3px;
-  }
-
   article h4 {
     font-size: var(--font-size-xs);
   }
@@ -704,26 +710,6 @@ Responsive – Small phones (< 400px)
   .text {
     font-size: 0.7rem;
     line-height: var(--line-height-normal);
-  }
-
-  .icon {
-    font-size: 1.2rem;
-    margin-top: var(--space-4);
-  }
-
-  .prev,
-  .next {
-    width: 2rem;
-    height: 2rem;
-    font-size: 0.875rem;
-  }
-
-  .prev {
-    left: var(--space-2);
-  }
-
-  .next {
-    right: var(--space-2);
   }
 
   .dots {
@@ -741,12 +727,6 @@ Responsive – Small phones (< 400px)
   }
 }
 
-/*
-===============
-Responsive – Phones (400px – 640px)
-===============
-*/
-
 @media (width >= 400px) and (width <= 640px) {
   .section {
     padding: var(--space-4) var(--space-3);
@@ -762,10 +742,6 @@ Responsive – Phones (400px – 640px)
     padding: var(--space-4) var(--space-4);
   }
 
-  .title {
-    margin-bottom: var(--space-10);
-  }
-
   .title h2 {
     font-size: var(--font-size-2xl);
   }
@@ -776,43 +752,9 @@ Responsive – Phones (400px – 640px)
     font-size: var(--font-size-xl);
   }
 
-  .section-center {
-    height: 460px;
-    border-radius: var(--radius-lg);
-  }
-
-  .content {
-    padding: var(--space-8) var(--space-5);
-  }
-
-  .person-img {
-    width: 110px;
-    height: 110px;
-    margin-bottom: var(--space-5);
-  }
-
   .text {
     max-width: 100%;
     font-size: var(--font-size-xs);
-  }
-
-  .prev,
-  .next {
-    width: 2.25rem;
-    height: 2.25rem;
-    font-size: 1rem;
-  }
-
-  .prev {
-    left: var(--space-2);
-  }
-
-  .next {
-    right: var(--space-2);
-  }
-
-  .icon {
-    font-size: 1.4rem;
   }
 
   .dots {
@@ -820,73 +762,20 @@ Responsive – Phones (400px – 640px)
   }
 }
 
-/*
-===============
-Responsive – Tablet Portrait (641px – 768px)
-===============
-*/
-
 @media (width >= 641px) and (width <= 768px) {
   .stats-dashboard {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-3);
   }
-
-  .section-center {
-    height: 480px;
-    border-radius: var(--radius-lg);
-  }
-
-  .content {
-    padding: var(--space-8) var(--space-6);
-  }
-
-  .person-img {
-    width: 120px;
-    height: 120px;
-  }
 }
-
-/*
-===============
-Responsive – Tablet Landscape (769px – 1024px)
-===============
-*/
-
-@media (width >= 769px) and (width <= 1024px) {
-  .section-center {
-    height: 500px;
-  }
-
-  .content {
-    padding: var(--space-10) var(--space-8);
-  }
-}
-
-/*
-===============
-Responsive – Large screens (> 1400px)
-===============
-*/
 
 @media (width > 1400px) {
   .section-center {
     max-width: 800px;
-    height: 560px;
-  }
-
-  .person-img {
-    width: 150px;
-    height: 150px;
   }
 
   .text {
     font-size: var(--font-size-base);
-    max-width: 80%;
-  }
-
-  .icon {
-    font-size: 2rem;
   }
 }
 

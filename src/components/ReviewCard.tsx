@@ -1,10 +1,3 @@
-/**
- * ReviewCard Component
- *
- * Deze component rendert een individuele klantbeoordeling,
- * inclusief afbeelding, naam, titel en citaat.
- */
-
 import React from "react";
 import { FaQuoteRight } from "react-icons/fa";
 import { PEOPLE } from "../types";

@@ -1,16 +1,4 @@
-/**
- * Review Slider App
- *
- * Deze applicatie toont klantbeoordelingen in een carrouselvorm.
- * Gebruikers kunnen handmatig navigeren met de pijltjesknoppen,
- * en de slides wisselen automatisch elke 5 seconden.
- *
- * Hoofdcomponenten:
- * - App: Hoofdcomponent die de slider beheert en rendert.
- * - ReviewCard: Component voor het weergeven van individuele beoordelingen.
- * - Data: Statische gegevens voor beoordelingen.
- * - Types: TypeScript interfaces voor typeveiligheid.
- */
+/** Review slider carousel met auto-slide, navigation, en stats dashboard. */
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
@@ -23,9 +11,6 @@ function App() {
   const [people] = useState<PEOPLE[]>(peopleData);
   const [index, setIndex] = useState<number>(0);
 
-  // Functie om naar de volgende/vorige slide te navigeren
-  // Delta is het aantal stappen (bijv. 1 voor volgende, -1 voor vorige)
-  // Gebruikt modulo om rond te gaan aan het einde/begin van de lijst
   const navigate = useCallback(
     (delta: number) => {
       setIndex(
@@ -35,8 +20,6 @@ function App() {
     [people.length],
   );
 
-  // Functie om de positie van een persoon in de slider te bepalen
-  // Retourneert CSS-klasse: 'activeSlide' voor huidige, 'lastSlide' voor vorige, 'nextSlide' voor anderen
   const getPosition = (personIndex: number): string => {
     if (personIndex === index) return "active-slide";
     if (personIndex === (index - 1 + people.length) % people.length)
@@ -44,9 +27,6 @@ function App() {
     return "next-slide";
   };
 
-  // useEffect voor automatische sliding elke 5 seconden
-  // Stelt een interval in dat navigate(1) aanroept om naar volgende slide te gaan
-  // Ruimt de interval op bij unmount of wanneer index/navigate verandert
   useEffect(() => {
     const slider = setInterval(() => {
       navigate(1);
@@ -54,27 +34,24 @@ function App() {
     return () => clearInterval(slider);
   }, [index, navigate]);
 
-  // Swipe detection voor mobiel
-  const touchStartX = useRef<number>(0);
-  const touchEndX = useRef<number>(0);
+  // Swipe detection – DRY: eenmalige drempelwaarde als SSOT
+  const touchX = useRef<{ start: number; end: number }>({ start: 0, end: 0 });
+  const MIN_SWIPE = 50;
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
+    touchX.current.start = e.touches[0].clientX;
   }, []);
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX;
+    touchX.current.end = e.touches[0].clientX;
   }, []);
 
   const handleTouchEnd = useCallback(() => {
-    const swipeDistance = touchStartX.current - touchEndX.current;
-    const minSwipe = 50;
+    const { start, end } = touchX.current;
+    const distance = start - end;
 
-    if (swipeDistance > minSwipe) {
-      navigate(1);
-    } else if (swipeDistance < -minSwipe) {
-      navigate(-1);
-    }
+    if (distance > MIN_SWIPE) navigate(1);
+    else if (distance < -MIN_SWIPE) navigate(-1);
   }, [navigate]);
 
   const buttons = [

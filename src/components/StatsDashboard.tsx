@@ -1,10 +1,3 @@
-/**
- * StatsDashboard Component
- *
- * Toont een overzicht van statistieken afgeleid van de review data,
- * boven de slider carrousel.
- */
-
 import { PEOPLE } from "../types";
 
 interface StatsDashboardProps {
