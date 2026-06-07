@@ -1,4 +1,7 @@
+import React, { useMemo } from "react";
 import { PEOPLE } from "../types";
+import { STATS_CONFIG } from "../constants";
+import { countUniqueRoles, aggregateWordsAndNameLength } from "../utils";
 
 interface StatsDashboardProps {
   people: PEOPLE[];
@@ -7,44 +10,21 @@ interface StatsDashboardProps {
 function StatsDashboard({ people }: StatsDashboardProps) {
   const totalReviews = people.length;
 
-  const uniqueRoles = new Set(people.map((p) => p.title)).size;
+  const uniqueRoles = countUniqueRoles(people);
 
-  const totalWords = people.reduce((sum, p) => {
-    return sum + p.quote.split(/\s+/).length;
-  }, 0);
+  const { totalWords, maxNameLength } = aggregateWordsAndNameLength(people);
 
   const avgWords = Math.round(totalWords / totalReviews);
 
-  const maxNameLength = people.reduce((max, p) => {
-    return Math.max(max, p.name.length);
-  }, 0);
-
-  const stats = [
-    {
-      label: "Total Reviews",
-      value: totalReviews,
-      suffix: "",
-      icon: "★",
-    },
-    {
-      label: "Unique Roles",
-      value: uniqueRoles,
-      suffix: "",
-      icon: "◆",
-    },
-    {
-      label: "Avg. Words",
-      value: totalReviews > 0 ? avgWords : 0,
-      suffix: " /review",
-      icon: "✎",
-    },
-    {
-      label: "Max Name Len",
-      value: maxNameLength,
-      suffix: " chars",
-      icon: "●",
-    },
-  ];
+  const stats = useMemo(
+    () => [
+      { ...STATS_CONFIG[0], value: totalReviews },
+      { ...STATS_CONFIG[1], value: uniqueRoles },
+      { ...STATS_CONFIG[2], value: totalReviews > 0 ? avgWords : 0 },
+      { ...STATS_CONFIG[3], value: maxNameLength },
+    ],
+    [totalReviews, uniqueRoles, avgWords, maxNameLength],
+  );
 
   return (
     <div className="stats-dashboard">
@@ -66,4 +46,4 @@ function StatsDashboard({ people }: StatsDashboardProps) {
   );
 }
 
-export default StatsDashboard;
+export default React.memo(StatsDashboard);

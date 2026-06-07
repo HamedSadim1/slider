@@ -89,9 +89,11 @@ Variables
   --icon-size: 1.75rem;
   --icon-margin-top: var(--space-5);
   --text-max-width: 85%;
+  --stats-cols: 4;
+  --dot-size: 8px;
 }
 
-/* SSOT – layout variabelen voor extra grote schermen */
+/* SSOT – large screens */
 @media (width > 1400px) {
   :root {
     --slider-height: 560px;
@@ -116,6 +118,7 @@ Variables
     --img-size: 120px;
     --content-padding-y: var(--space-8);
     --content-padding-x: var(--space-6);
+    --stats-cols: 2;
   }
 }
 
@@ -132,6 +135,7 @@ Variables
     --content-padding-x: var(--space-5);
     --title-bottom: var(--space-10);
     --icon-size: 1.4rem;
+    --stats-cols: 2;
   }
 }
 
@@ -150,6 +154,8 @@ Variables
     --title-bottom: var(--space-8);
     --icon-size: 1.2rem;
     --icon-margin-top: var(--space-4);
+    --dot-size: 6px;
+    --stats-cols: 2;
   }
 }
 
@@ -215,6 +221,22 @@ img {
 
 /*
 ===============
+Utilities
+===============
+*/
+
+article,
+.title h2,
+.stat-icon,
+.prev,
+.next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*
+===============
 Section
 ===============
 */
@@ -237,7 +259,7 @@ Stats Dashboard
 
 .stats-dashboard {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(var(--stats-cols), 1fr);
   gap: var(--space-4);
   width: 100%;
   max-width: var(--fixed-width);
@@ -264,9 +286,6 @@ Stats Dashboard
 }
 
 .stat-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: var(--radius-md);
@@ -321,9 +340,6 @@ Title
 }
 
 .title h2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-3xl);
   letter-spacing: -0.02em;
@@ -385,9 +401,6 @@ article {
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   opacity: 0;
   transition:
     opacity var(--transition-slide),
@@ -471,9 +484,7 @@ article h4 {
   margin-bottom: var(--space-2);
 }
 
-.active-slide h4 {
-  animation: fade-in-up 0.4s var(--transition-base) 0.1s both;
-}
+
 
 /*
 ===============
@@ -494,10 +505,6 @@ Title (job role)
   display: none;
 }
 
-.active-slide .content .title {
-  animation: fade-in-up 0.4s var(--transition-base) 0.2s both;
-}
-
 /*
 ===============
 Quote text
@@ -514,10 +521,6 @@ Quote text
   font-weight: var(--font-weight-normal);
 }
 
-.active-slide .text {
-  animation: fade-in-up 0.4s var(--transition-base) 0.3s both;
-}
-
 /*
 ===============
 Quote icon
@@ -531,9 +534,23 @@ Quote icon
   transition: color var(--transition-fast);
 }
 
+/*
+===============
+Animations
+===============
+*/
+
+.active-slide h4,
+.active-slide .content .title,
+.active-slide .text,
 .active-slide .icon {
-  animation: fade-in-up 0.4s var(--transition-base) 0.4s both;
+  animation: fade-in-up 0.4s var(--transition-base) var(--anim-delay, 0s) both;
 }
+
+.active-slide h4              { --anim-delay: 0.1s; }
+.active-slide .content .title { --anim-delay: 0.2s; }
+.active-slide .text           { --anim-delay: 0.3s; }
+.active-slide .icon           { --anim-delay: 0.4s; }
 
 /*
 ===============
@@ -557,9 +574,6 @@ Navigation Buttons
   z-index: 10;
   width: var(--nav-btn-size);
   height: var(--nav-btn-size);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: var(--clr-white);
   color: var(--clr-primary-600);
   font-size: var(--nav-btn-font-size);
@@ -603,8 +617,8 @@ Indicator Dots
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: var(--dot-size);
+  height: var(--dot-size);
   border-radius: var(--radius-full);
   background: var(--clr-neutral-300);
   border: none;
@@ -657,7 +671,6 @@ Responsive – resterende overrides (niet via SSOT variabelen)
   }
 
   .stats-dashboard {
-    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-2);
     margin-bottom: var(--space-6);
   }
@@ -717,11 +730,6 @@ Responsive – resterende overrides (niet via SSOT variabelen)
     gap: var(--space-2);
   }
 
-  .dot {
-    width: 6px;
-    height: 6px;
-  }
-
   .dot.active {
     width: 18px;
   }
@@ -733,7 +741,6 @@ Responsive – resterende overrides (niet via SSOT variabelen)
   }
 
   .stats-dashboard {
-    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-3);
     margin-bottom: var(--space-6);
   }
@@ -764,7 +771,6 @@ Responsive – resterende overrides (niet via SSOT variabelen)
 
 @media (width >= 641px) and (width <= 768px) {
   .stats-dashboard {
-    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-3);
   }
 }
