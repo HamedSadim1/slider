@@ -1,108 +1,153 @@
-# Reviews Slider
+  <div align="center">
+    <h1>⭐ Reviews Slider</h1>
+    <p>
+      <strong>A modern, responsive React review slider component</strong>
+      <br />
+      Built with React 19, TypeScript and Vite
+    </p>
+    <p>
+      <a href="#features">Features</a> •
+      <a href="#screenshots">Screenshots</a> •
+      <a href="#technologies">Technologies</a> •
+      <a href="#installation">Installation</a> •
+      <a href="#project-structure">Structure</a>
+    </p>
+    <br />
+  </div>
 
-A modern, responsive React slider component built with TypeScript and Vite, showcasing customer reviews with smooth transitions and navigation controls.
+## 📸 Screenshots
 
-## Features
+<p align="center">
+  <img src="screenshots/slider-demo.gif" alt="Reviews Slider Demo" width="700" />
+  <br />
+  <em>Auto-slide, navigation buttons and indicator dots in action</em>
+</p>
 
-- **Smooth Transitions**: Automatic sliding every 5 seconds with manual navigation.
-- **Responsive Design**: Works seamlessly across different screen sizes.
-- **TypeScript Support**: Fully typed for better development experience.
-- **Customizable**: Easy to integrate and style according to your needs.
-- **DRY Principles**: Code follows Don't Repeat Yourself principles for maintainability.
+<br />
 
-## Technologies Used
+<p align="center">
+  <img src="screenshots/slider-dashboard.png" alt="Reviews Slider Dashboard" width="700" />
+  <br />
+  <em>Dashboard with stat cards and the active review</em>
+</p>
 
-- **React 19**: Latest version for building the user interface.
-- **TypeScript**: For type safety and better code quality.
-- **Vite**: Fast build tool and development server.
-- **React Icons**: For navigation buttons and quote icon.
-- **ESLint**: For code linting and consistency.
+<p align="center">
+  <img src="screenshots/slider-review.png" alt="Reviews Slider - Next Review" width="700" />
+  <br />
+  <em>Auto-slide transitioning to the next review with animation</em>
+</p>
 
-## Installation
+## ✨ Features
 
-1. Clone the repository:
+- **🎠 Auto-slider** — Transitions to the next slide every 5 seconds
+- **👆 Swipe detection** — Swipe left/right on mobile to navigate
+- **📊 Stats dashboard** — Displays Total Reviews, Unique Roles, Avg. Words, Max Name Len
+- **● Indicator dots** — Clickable dots to jump directly to a slide
+- **📱 Fully responsive** — 5 breakpoints from small phones to large screens
+- **🎨 Modern design** — Blue color palette, Inter font, smooth animations
+- **⚡ React Compiler** — Automatic memoization for optimal performance
+- **♿ Accessible** — Aria labels and prefers-reduced-motion support
+- **🧩 DRY principles** — No duplicate code, SSOT for constants and utility functions
 
-   ```bash
-   git clone https://github.com/HamedSadim1/slider.git
-   cd slider
-   ```
+## 🛠 Technologies
 
-2. Install dependencies:
+| Tech | Version |
+|------|---------|
+| [React](https://react.dev/) | 19.2.7 |
+| [TypeScript](https://www.typescriptlang.org/) | 6.0 |
+| [Vite](https://vitejs.dev/) | 8.0 |
+| [React Icons](https://react-icons.github.io/react-icons/) | 5.6 |
+| [React Compiler](https://react.dev/learn/react-compiler) | 1.0 |
+| [ESLint](https://eslint.org/) | 10.4 |
+| [Stylelint](https://stylelint.io/) | 17.13 |
 
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-
-   ```bash
-   npm run dev
-   ```
-
-4. Open your browser and navigate to `http://localhost:5173` (or the port shown in the terminal).
-
-## Usage
-
-The slider displays a series of customer reviews. It automatically transitions between slides every 5 seconds. Users can also manually navigate using the previous and next buttons.
-
-### Key Components
-
-- **App.tsx**: Main component managing state and rendering the slider.
-- **ReviewCard.tsx**: Individual review card component for better modularity.
-- **Data**: Review data stored in `src/data/index.ts`.
-- **Types**: TypeScript interfaces in `src/types/index.ts`.
-
-## Scripts
-
-- `npm run dev`: Start the development server.
-- `npm run build`: Build the project for production.
-- `npm run preview`: Preview the production build locally.
-- `npm run lint`: Run ESLint for code quality checks.
-
-## Project Structure
+## 📦 Installation
 
 ```bash
-slider/
-├── public/
-│   ├── sidebar.png
-├── src/
-│   ├── components/
-│   │   └── ReviewCard.tsx
-│   ├── data/
-│   │   └── index.ts
-│   ├── types/
-│   │   └── index.ts
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── vite-env.d.ts
-├── .gitignore
-├── eslint.config.js
-├── index.html
-├── package.json
-├── README.md
-├── tsconfig.json
-├── tsconfig.node.json
-└── vite.config.ts
+# 1. Clone the repository
+git clone https://github.com/HamedSadim1/slider.git
+cd slider
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the development server
+npm run dev
+
+# 4. Open http://localhost:5173 in your browser
 ```
 
-## Contributing
+## 📁 Project Structure
 
-Contributions are welcome! Please follow these steps:
+```
+slider/
+├── public/
+├── screenshots/
+│   ├── slider-dashboard.png
+│   └── slider-review.png
+├── src/
+│   ├── components/
+│   │   ├── ReviewCard.tsx        # Individual review card
+│   │   ├── StatsDashboard.tsx    # Statistics dashboard
+│   │   ├── SectionTitle.tsx      # Section title component
+│   │   ├── SliderNavButtons.tsx  # Navigation buttons
+│   │   └── SlideIndicator.tsx    # Indicator dots
+│   ├── constants/
+│   │   └── index.ts              # Central constants (SSOT)
+│   ├── hooks/
+│   │   ├── useAutoSlide.ts       # Auto-slide interval hook
+│   │   └── useSwipe.ts           # Touch swipe detection hook
+│   ├── utils/
+│   │   └── index.ts              # Utility functions (DRY)
+│   ├── data/
+│   │   └── index.ts              # Review data
+│   ├── types/
+│   │   └── index.ts              # TypeScript types
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── .github/
+│   └── workflows/
+│       └── pr.yml               # GitHub Actions CI
+├── index.html
+├── package.json
+├── vite.config.ts
+├── eslint.config.ts
+├── stylelint.config.ts
+├── commitlint.config.ts
+└── README.md
+```
 
-1. Fork the repository.
-2. Create a new branch for your feature: `git checkout -b feature-name`.
-3. Make your changes and commit them: `git commit -m 'Add some feature'`.
-4. Push to the branch: `git push origin feature-name`.
-5. Submit a pull request.
+## 📜 Scripts
 
-## License
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start the development server |
+| `npm run build` | Build for production (tsc + vite) |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint (0 warnings policy) |
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 🧪 CI/CD
 
-## Author
+Every Pull Request to `main` runs:
 
-Hamed Sadim - [GitHub](https://github.com/HamedSadim1)
+- **Lint** — ESLint on all TypeScript files
+- **Build** — TypeScript compilation + Vite build
+- **Commitlint** — Conventional commits validation
+
+## 🧠 Architecture
+
+The app follows several principles:
+
+- **SSOT (Single Source of Truth)**: All constant values are in `src/constants/`, all types in `src/types/`
+- **DRY (Don't Repeat Yourself)**: Utility functions in `src/utils/` are reused by hooks and components
+- **Component splitting**: `App.tsx` is split into 5 smaller components and 2 custom hooks
+- **React Compiler**: Automatic memoization removes the need for manual `React.memo`/`useMemo`/`useCallback`
+
+## 👤 Author
+
+**Hamed Sadim** — [GitHub](https://github.com/HamedSadim1)
 
 ---
 
-Built with ❤️ using React and TypeScript.
+<p align="center">Built with ❤️ using React, TypeScript & Vite</p>
