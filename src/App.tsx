@@ -12,11 +12,12 @@
  * - Types: TypeScript interfaces voor typeveiligheid.
  */
 
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { peopleData } from "./data";
 import { PEOPLE } from "./types";
 import ReviewCard from "./components/ReviewCard";
+import StatsDashboard from "./components/StatsDashboard";
 
 function App() {
   const [people] = useState<PEOPLE[]>(peopleData);
@@ -53,6 +54,29 @@ function App() {
     return () => clearInterval(slider);
   }, [index, navigate]);
 
+  // Swipe detection voor mobiel
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    const swipeDistance = touchStartX.current - touchEndX.current;
+    const minSwipe = 50;
+
+    if (swipeDistance > minSwipe) {
+      navigate(1);
+    } else if (swipeDistance < -minSwipe) {
+      navigate(-1);
+    }
+  }, [navigate]);
+
   const buttons = [
     { className: "prev", Icon: FiChevronLeft, onClick: () => navigate(-1) },
     { className: "next", Icon: FiChevronRight, onClick: () => navigate(1) },
@@ -60,12 +84,18 @@ function App() {
 
   return (
     <section className="section">
+      <StatsDashboard people={people} />
       <div className="title">
         <h2>
           <span>/</span>reviews
         </h2>
       </div>
-      <div className="section-center">
+      <div
+        className="section-center"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {people.map((person, personIndex) => (
           <ReviewCard
             key={person.id}
@@ -74,10 +104,25 @@ function App() {
           />
         ))}
         {buttons.map(({ className, Icon, onClick }) => (
-          <button key={className} className={className} onClick={onClick}>
+          <button
+            key={className}
+            className={className}
+            onClick={onClick}
+            aria-label={className === "prev" ? "Previous review" : "Next review"}
+          >
             <Icon />
           </button>
         ))}
+        <div className="dots">
+          {people.map((_, personIndex) => (
+            <button
+              key={personIndex}
+              className={`dot${personIndex === index ? " active" : ""}`}
+              onClick={() => setIndex(personIndex)}
+              aria-label={`Go to slide ${personIndex + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
